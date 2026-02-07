@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Rectangle } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Rectangle, Circle } from 'react-leaflet';
 import { useState } from 'react';
 import L from 'leaflet';
 
@@ -74,13 +74,30 @@ const Map = ({ onLocationSelect, selectedGeometry, selectionMode = 'point' }) =>
         />
 
         {selectedGeometry && selectedGeometry.type === 'Point' && (
-          <Marker position={[selectedGeometry.coordinates[1], selectedGeometry.coordinates[0]]}>
-            <Popup>
-              Selected Location<br/>
-              Lat: {selectedGeometry.coordinates[1].toFixed(4)}<br/>
-              Lon: {selectedGeometry.coordinates[0].toFixed(4)}
-            </Popup>
-          </Marker>
+          <>
+            <Circle
+              center={[selectedGeometry.coordinates[1], selectedGeometry.coordinates[0]]}
+              radius={1000}
+              pathOptions={{
+                color: '#3B82F6',
+                fillColor: '#3B82F6',
+                fillOpacity: 0.15,
+                weight: 2
+              }}
+            >
+              <Popup>
+                Analysis Area (1km radius)<br/>
+                This buffered area will be analyzed
+              </Popup>
+            </Circle>
+            <Marker position={[selectedGeometry.coordinates[1], selectedGeometry.coordinates[0]]}>
+              <Popup>
+                Selected Location<br/>
+                Lat: {selectedGeometry.coordinates[1].toFixed(4)}<br/>
+                Lon: {selectedGeometry.coordinates[0].toFixed(4)}
+              </Popup>
+            </Marker>
+          </>
         )}
 
         {selectedGeometry && selectedGeometry.type === 'Polygon' && (

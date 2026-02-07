@@ -158,6 +158,24 @@ function App() {
               </h2>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {selectedGeometry && selectedGeometry.type === 'Point' && analysisType === 'landcover' && (
+                  <div style={{
+                    padding: '12px',
+                    background: '#EFF6FF',
+                    border: '1px solid #BFDBFE',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    gap: '8px',
+                    fontSize: '13px',
+                    color: '#1E40AF'
+                  }}>
+                    <span style={{ flexShrink: 0 }}>ℹ️</span>
+                    <span>
+                      A 1km radius buffer will be applied around your point to analyze the surrounding area.
+                    </span>
+                  </div>
+                )}
+
                 <SourceSelector
                   selected={selectedSources}
                   onChange={setSelectedSources}
@@ -243,19 +261,54 @@ function App() {
                     </h3>
 
                     {analysisType === 'landcover' && results.land_cover_distribution && (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        {Object.entries(results.land_cover_distribution).map(([key, value]) => (
-                          <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: '13px', textTransform: 'capitalize' }}>{key}</span>
-                            <span style={{ fontSize: '13px', fontWeight: '600' }}>
-                              {(value * 100).toFixed(1)}%
-                            </span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {Object.entries(results.land_cover_distribution).map(([key, value]) => {
+                          const colors = {
+                            water: '#3B82F6',
+                            vegetation: '#10B981',
+                            urban: '#EF4444',
+                            barren: '#F59E0B',
+                            forest: '#059669'
+                          };
+                          return (
+                            <div key={key} style={{ marginBottom: '4px' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                                <span style={{ fontSize: '13px', textTransform: 'capitalize', fontWeight: '500' }}>
+                                  {key}
+                                </span>
+                                <span style={{ fontSize: '13px', fontWeight: '600', color: colors[key] || '#6B7280' }}>
+                                  {(value * 100).toFixed(1)}%
+                                </span>
+                              </div>
+                              <div style={{
+                                width: '100%',
+                                height: '8px',
+                                background: '#E5E7EB',
+                                borderRadius: '4px',
+                                overflow: 'hidden'
+                              }}>
+                                <div style={{
+                                  width: `${value * 100}%`,
+                                  height: '100%',
+                                  background: colors[key] || '#6B7280',
+                                  borderRadius: '4px',
+                                  transition: 'width 0.3s ease'
+                                }} />
+                              </div>
+                            </div>
+                          );
+                        })}
+                        <div style={{ marginTop: '8px', paddingTop: '12px', borderTop: '1px solid var(--border)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                            <span>Images analyzed:</span>
+                            <span style={{ fontWeight: '600' }}>{results.image_count}</span>
                           </div>
-                        ))}
-                        <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--border)' }}>
-                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                            Images analyzed: {results.image_count}
-                          </div>
+                          {results.metadata && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                              <span>Total area:</span>
+                              <span style={{ fontWeight: '600' }}>{results.metadata.total_area_km2} km²</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}
