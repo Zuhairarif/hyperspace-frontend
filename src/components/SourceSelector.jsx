@@ -12,7 +12,9 @@ const SOURCES = [
     badgeClass: 'badge-blue',
     tooltip: 'High-resolution multispectral imaging for vegetation, water, and land monitoring.',
     confidence: 'High',
-    confidenceLevel: 3
+    confidenceLevel: 3,
+    cloudCover: 'Low',
+    cloudPct: '1%'
   },
   {
     id: 'landsat-8',
@@ -25,7 +27,9 @@ const SOURCES = [
     badgeClass: 'badge-green',
     tooltip: 'Long-running Earth observation program with decades of historical data for trend analysis.',
     confidence: 'Medium',
-    confidenceLevel: 2
+    confidenceLevel: 2,
+    cloudCover: 'Low',
+    cloudPct: '4%'
   },
   {
     id: 'isro-resourcesat',
@@ -38,7 +42,9 @@ const SOURCES = [
     badgeClass: 'badge-amber',
     tooltip: 'Indian Remote Sensing satellite providing medium-resolution terrain and resource mapping.',
     confidence: 'Medium',
-    confidenceLevel: 2
+    confidenceLevel: 2,
+    cloudCover: 'Medium',
+    cloudPct: '12%'
   }
 ];
 
@@ -149,6 +155,13 @@ const SourceSelector = ({ selected, onChange, multiple = true }) => {
                   }}>
                     {source.resolution}
                   </span>
+                  <span className="badge" style={{
+                    background: source.cloudCover === 'Low' ? 'var(--secondary-light)' : 'var(--accent-light)',
+                    color: source.cloudCover === 'Low' ? 'var(--secondary)' : 'var(--accent)',
+                    fontSize: '10px'
+                  }}>
+                    {'Cloud: ' + source.cloudCover + ' (' + source.cloudPct + ')'}
+                  </span>
                 </div>
                 <div style={{
                   fontSize: '11px',
@@ -197,6 +210,19 @@ const SourceSelector = ({ selected, onChange, multiple = true }) => {
                     }}>
                       {source.confidence}
                     </span>
+                    {/* Confidence explanation tooltip */}
+                    <div className="tooltip-container" style={{ marginLeft: '2px' }} onClick={(e) => e.stopPropagation()}>
+                      <div className="tooltip-trigger" style={{
+                        width: '13px',
+                        height: '13px',
+                        fontSize: '8px'
+                      }}>
+                        <Info size={7} />
+                      </div>
+                      <div className="tooltip-content" style={{ width: '220px' }}>
+                        Confidence reflects cross-satellite agreement, spatial resolution, and temporal alignment.
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

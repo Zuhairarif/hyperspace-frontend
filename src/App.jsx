@@ -8,6 +8,7 @@ import InsightPanel from './components/InsightPanel';
 import FusionExplanation from './components/FusionExplanation';
 import FusionStatusBanner from './components/FusionStatusBanner';
 import TemporalTimeline from './components/TemporalTimeline';
+import DataSourcesFooter from './components/DataSourcesFooter';
 import { analyzeLandCover, analyzeNDVI, compareSources } from './services/api';
 import {
   Loader2,
@@ -645,6 +646,9 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Data Source Transparency Footer */}
+      <DataSourcesFooter />
     </div>
   );
 }

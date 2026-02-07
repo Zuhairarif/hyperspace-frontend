@@ -77,6 +77,31 @@ const Header = ({ selectedSourcesCount = 0 }) => {
         </div>
 
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {/* Live EO Data indicator */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '6px 12px',
+            background: 'var(--secondary-light)',
+            borderRadius: '100px',
+            fontSize: '11px',
+            fontWeight: '600',
+            color: 'var(--secondary)',
+            border: '1px solid rgba(5, 150, 105, 0.15)'
+          }}>
+            <span style={{
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              background: 'var(--secondary)',
+              boxShadow: '0 0 0 3px rgba(5, 150, 105, 0.2)',
+              flexShrink: 0,
+              animation: 'pulse 2s ease-in-out infinite'
+            }} />
+            Live EO Data
+          </div>
+
           <div style={{
             display: 'flex',
             alignItems: 'center',

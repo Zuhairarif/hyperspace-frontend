@@ -1,4 +1,4 @@
-import { Layers, TrendingUp, GitCompare } from 'lucide-react';
+import { Layers, TrendingUp, GitCompare, BarChart3 } from 'lucide-react';
 
 const ANALYSIS_TYPES = [
   {
@@ -113,6 +113,64 @@ const AnalysisTypeSelector = ({ value, onChange }) => {
             </div>
           );
         })}
+        {/* Time-Series Coming Soon */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '10px 12px',
+            border: '1.5px dashed var(--border)',
+            borderRadius: 'var(--radius-md)',
+            background: 'var(--background)',
+            opacity: 0.6,
+            cursor: 'not-allowed'
+          }}
+          aria-disabled="true"
+        >
+          <div style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--border-light)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
+            <BarChart3 size={16} color="var(--text-tertiary)" />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{
+              fontSize: '13px',
+              fontWeight: '600',
+              color: 'var(--text-tertiary)',
+              marginBottom: '1px'
+            }}>
+              Time-Series Analysis
+            </div>
+            <div style={{
+              fontSize: '11px',
+              color: 'var(--text-tertiary)',
+              lineHeight: '1.3'
+            }}>
+              Multi-temporal change detection
+            </div>
+          </div>
+          <span style={{
+            fontSize: '9px',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            padding: '3px 8px',
+            borderRadius: '100px',
+            background: 'var(--border)',
+            color: 'var(--text-tertiary)',
+            whiteSpace: 'nowrap'
+          }}>
+            Coming Soon
+          </span>
+        </div>
       </div>
     </div>
   );
