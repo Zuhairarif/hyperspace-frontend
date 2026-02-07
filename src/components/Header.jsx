@@ -1,35 +1,36 @@
 import { Globe, Activity } from 'lucide-react';
 
-const OrbitalLogo = () => (
+const GeoscopeLogo = () => (
   <div style={{
-    width: '38px',
-    height: '38px',
+    width: '40px',
+    height: '40px',
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   }}>
-    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-      {/* Core dot */}
-      <circle cx="19" cy="19" r="4" fill="url(#coreGrad)" />
-      {/* Orbit 1 - Sentinel (blue) */}
-      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#2563EB" strokeWidth="1.5" opacity="0.6"
-        transform="rotate(-20, 19, 19)" />
-      <circle cx="31" cy="15" r="2.5" fill="#2563EB" />
-      {/* Orbit 2 - Landsat (green) */}
-      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#059669" strokeWidth="1.5" opacity="0.6"
-        transform="rotate(30, 19, 19)" />
-      <circle cx="8" cy="13" r="2.5" fill="#059669" />
-      {/* Orbit 3 - ISRO (amber) */}
-      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#D97706" strokeWidth="1.5" opacity="0.6"
-        transform="rotate(80, 19, 19)" />
-      <circle cx="14" cy="32" r="2.5" fill="#D97706" />
-      <defs>
-        <radialGradient id="coreGrad">
-          <stop offset="0%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#059669" />
-        </radialGradient>
-      </defs>
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Scope reticle circle */}
+      <circle cx="20" cy="20" r="8" stroke="#1E3A8A" strokeWidth="1.5" fill="none" />
+      {/* Crosshair lines */}
+      <line x1="20" y1="10" x2="20" y2="15" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="20" y1="25" x2="20" y2="30" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="10" y1="20" x2="15" y2="20" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="25" y1="20" x2="30" y2="20" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
+      {/* Central fusion dot */}
+      <circle cx="20" cy="20" r="2.2" fill="#0EA5E9" />
+      {/* Orbit arc 1 - top-right sweep */}
+      <path d="M 32 8 A 16 16 0 0 1 38 20" stroke="#0EA5E9" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      {/* Satellite 1 */}
+      <rect x="36.5" y="18.5" width="3" height="2" rx="0.5" fill="#0EA5E9" />
+      <line x1="38" y1="17.5" x2="38" y2="21.5" stroke="#0EA5E9" strokeWidth="0.8" strokeLinecap="round" />
+      {/* Orbit arc 2 - bottom-left sweep */}
+      <path d="M 8 32 A 16 16 0 0 1 2 20" stroke="#1E3A8A" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      {/* Satellite 2 */}
+      <rect x="0.5" y="18.5" width="3" height="2" rx="0.5" fill="#1E3A8A" />
+      <line x1="2" y1="17.5" x2="2" y2="21.5" stroke="#1E3A8A" strokeWidth="0.8" strokeLinecap="round" />
+      {/* Orbit arc 3 - subtle tertiary */}
+      <path d="M 10 4 A 16 16 0 0 0 4 14" stroke="#1E3A8A" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.4" />
     </svg>
   </div>
 );
@@ -52,26 +53,28 @@ const Header = ({ selectedSourcesCount = 0 }) => {
         height: '64px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <OrbitalLogo />
+          <GeoscopeLogo />
           <div>
             <h1 style={{
               fontSize: '18px',
-              fontWeight: '700',
+              fontWeight: '800',
               margin: 0,
-              color: 'var(--text-primary)',
-              letterSpacing: '-0.02em',
-              lineHeight: '1.2'
+              color: '#1E3A8A',
+              letterSpacing: '0.06em',
+              lineHeight: '1.2',
+              textTransform: 'uppercase'
             }}>
-              Hyperspace
+              {'GEO'}
+              <span style={{ color: '#0EA5E9', fontWeight: '800' }}>SCOPE</span>
             </h1>
             <p style={{
-              fontSize: '11px',
+              fontSize: '10.5px',
               color: 'var(--text-secondary)',
               margin: 0,
-              letterSpacing: '0.02em',
+              letterSpacing: '0.03em',
               fontWeight: '500'
             }}>
-              Unified Multi-Satellite Intelligence Platform
+              Unified Multi-Source Earth Observation Dashboard
             </p>
           </div>
         </div>
