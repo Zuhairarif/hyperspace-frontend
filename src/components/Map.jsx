@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Rectangle, Circle } from 'react-leaflet';
 import { useState } from 'react';
 import L from 'leaflet';
+import MapLegend from './MapLegend';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -52,20 +53,35 @@ function MapClickHandler({ onLocationSelect, selectionMode }) {
   return null;
 }
 
-const Map = ({ onLocationSelect, selectedGeometry, selectionMode = 'point' }) => {
+const Map = ({
+  onLocationSelect,
+  selectedGeometry,
+  selectionMode = 'point',
+  analysisType = 'landcover',
+  selectedSources = []
+}) => {
   const defaultCenter = [20.5937, 78.9629];
   const defaultZoom = 5;
 
   return (
-    <div style={{ height: '500px', width: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+    <div style={{
+      height: '520px',
+      width: '100%',
+      borderRadius: 'var(--radius-lg)',
+      overflow: 'hidden',
+      position: 'relative',
+      border: '1px solid var(--border-light)'
+    }}>
       <MapContainer
         center={defaultCenter}
         zoom={defaultZoom}
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          subdomains="abcd"
+          maxZoom={20}
         />
 
         <MapClickHandler
@@ -79,10 +95,11 @@ const Map = ({ onLocationSelect, selectedGeometry, selectionMode = 'point' }) =>
               center={[selectedGeometry.coordinates[1], selectedGeometry.coordinates[0]]}
               radius={1000}
               pathOptions={{
-                color: '#3B82F6',
-                fillColor: '#3B82F6',
-                fillOpacity: 0.15,
-                weight: 2
+                color: '#2563EB',
+                fillColor: '#2563EB',
+                fillOpacity: 0.1,
+                weight: 2,
+                dashArray: '6 4'
               }}
             >
               <Popup>
@@ -92,7 +109,7 @@ const Map = ({ onLocationSelect, selectedGeometry, selectionMode = 'point' }) =>
             </Circle>
             <Marker position={[selectedGeometry.coordinates[1], selectedGeometry.coordinates[0]]}>
               <Popup>
-                Selected Location<br/>
+                <strong>Selected Location</strong><br/>
                 Lat: {selectedGeometry.coordinates[1].toFixed(4)}<br/>
                 Lon: {selectedGeometry.coordinates[0].toFixed(4)}
               </Popup>
@@ -106,12 +123,22 @@ const Map = ({ onLocationSelect, selectedGeometry, selectionMode = 'point' }) =>
               [selectedGeometry.coordinates[0][0][1], selectedGeometry.coordinates[0][0][0]],
               [selectedGeometry.coordinates[0][2][1], selectedGeometry.coordinates[0][2][0]]
             ]}
-            pathOptions={{ color: 'var(--primary)', weight: 2 }}
+            pathOptions={{
+              color: '#2563EB',
+              weight: 2,
+              fillOpacity: 0.1,
+              dashArray: '6 4'
+            }}
           >
-            <Popup>Selected Area</Popup>
+            <Popup><strong>Selected Area</strong></Popup>
           </Rectangle>
         )}
       </MapContainer>
+
+      <MapLegend
+        analysisType={analysisType}
+        selectedSources={selectedSources}
+      />
     </div>
   );
 };
