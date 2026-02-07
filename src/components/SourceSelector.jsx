@@ -10,7 +10,9 @@ const SOURCES = [
     color: 'var(--sentinel-color)',
     colorRaw: '#2563EB',
     badgeClass: 'badge-blue',
-    tooltip: 'High-resolution multispectral imaging for vegetation, water, and land monitoring.'
+    tooltip: 'High-resolution multispectral imaging for vegetation, water, and land monitoring.',
+    confidence: 'High',
+    confidenceLevel: 3
   },
   {
     id: 'landsat-8',
@@ -21,7 +23,9 @@ const SOURCES = [
     color: 'var(--landsat-color)',
     colorRaw: '#059669',
     badgeClass: 'badge-green',
-    tooltip: 'Long-running Earth observation program with decades of historical data for trend analysis.'
+    tooltip: 'Long-running Earth observation program with decades of historical data for trend analysis.',
+    confidence: 'Medium',
+    confidenceLevel: 2
   },
   {
     id: 'isro-resourcesat',
@@ -32,7 +36,9 @@ const SOURCES = [
     color: 'var(--isro-color)',
     colorRaw: '#D97706',
     badgeClass: 'badge-amber',
-    tooltip: 'Indian Remote Sensing satellite providing medium-resolution terrain and resource mapping.'
+    tooltip: 'Indian Remote Sensing satellite providing medium-resolution terrain and resource mapping.',
+    confidence: 'Medium',
+    confidenceLevel: 2
   }
 ];
 
@@ -151,6 +157,48 @@ const SourceSelector = ({ selected, onChange, multiple = true }) => {
                 }}>
                   {source.provider}
                 </div>
+                {/* Confidence meter */}
+                {isSelected && (
+                  <div className="fade-in" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    marginTop: '6px'
+                  }}>
+                    <span style={{
+                      fontSize: '10px',
+                      fontWeight: '600',
+                      color: 'var(--text-tertiary)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em'
+                    }}>
+                      Confidence
+                    </span>
+                    <div style={{ display: 'flex', gap: '3px' }}>
+                      {[1, 2, 3].map((level) => (
+                        <div
+                          key={level}
+                          style={{
+                            width: '14px',
+                            height: '4px',
+                            borderRadius: '2px',
+                            background: level <= source.confidenceLevel
+                              ? source.colorRaw
+                              : 'var(--border)',
+                            transition: 'background 0.2s ease'
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span style={{
+                      fontSize: '10px',
+                      fontWeight: '600',
+                      color: source.confidence === 'High' ? 'var(--secondary)' : 'var(--accent)'
+                    }}>
+                      {source.confidence}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Info tooltip */}

@@ -381,6 +381,29 @@ code {
   z-index: 1000;
 }
 
+/* Opacity slider */
+.opacity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  cursor: pointer;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 2px var(--shadow);
+}
+
+.opacity-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  cursor: pointer;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 2px var(--shadow);
+}
+
 /* Empty state */
 .empty-state {
   display: flex;

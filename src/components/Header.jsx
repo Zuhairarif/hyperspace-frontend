@@ -1,4 +1,38 @@
-import { Satellite, Globe, Activity } from 'lucide-react';
+import { Globe, Activity } from 'lucide-react';
+
+const OrbitalLogo = () => (
+  <div style={{
+    width: '38px',
+    height: '38px',
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}>
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      {/* Core dot */}
+      <circle cx="19" cy="19" r="4" fill="url(#coreGrad)" />
+      {/* Orbit 1 - Sentinel (blue) */}
+      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#2563EB" strokeWidth="1.5" opacity="0.6"
+        transform="rotate(-20, 19, 19)" />
+      <circle cx="31" cy="15" r="2.5" fill="#2563EB" />
+      {/* Orbit 2 - Landsat (green) */}
+      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#059669" strokeWidth="1.5" opacity="0.6"
+        transform="rotate(30, 19, 19)" />
+      <circle cx="8" cy="13" r="2.5" fill="#059669" />
+      {/* Orbit 3 - ISRO (amber) */}
+      <ellipse cx="19" cy="19" rx="14" ry="6" stroke="#D97706" strokeWidth="1.5" opacity="0.6"
+        transform="rotate(80, 19, 19)" />
+      <circle cx="14" cy="32" r="2.5" fill="#D97706" />
+      <defs>
+        <radialGradient id="coreGrad">
+          <stop offset="0%" stopColor="#2563EB" />
+          <stop offset="100%" stopColor="#059669" />
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+);
 
 const Header = ({ selectedSourcesCount = 0 }) => {
   return (
@@ -18,16 +52,7 @@ const Header = ({ selectedSourcesCount = 0 }) => {
         height: '64px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-            padding: '9px',
-            borderRadius: 'var(--radius-md)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Satellite size={20} color="white" />
-          </div>
+          <OrbitalLogo />
           <div>
             <h1 style={{
               fontSize: '18px',
@@ -40,12 +65,13 @@ const Header = ({ selectedSourcesCount = 0 }) => {
               Hyperspace
             </h1>
             <p style={{
-              fontSize: '12px',
+              fontSize: '11px',
               color: 'var(--text-secondary)',
               margin: 0,
-              letterSpacing: '0.01em'
+              letterSpacing: '0.02em',
+              fontWeight: '500'
             }}>
-              Unified Multi-Satellite Analysis Platform
+              Unified Multi-Satellite Intelligence Platform
             </p>
           </div>
         </div>

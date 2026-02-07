@@ -6,6 +6,8 @@ import DateRangePicker from './components/DateRangePicker';
 import AnalysisTypeSelector from './components/AnalysisTypeSelector';
 import InsightPanel from './components/InsightPanel';
 import FusionExplanation from './components/FusionExplanation';
+import FusionStatusBanner from './components/FusionStatusBanner';
+import TemporalTimeline from './components/TemporalTimeline';
 import { analyzeLandCover, analyzeNDVI, compareSources } from './services/api';
 import {
   Loader2,
@@ -97,6 +99,9 @@ function App() {
         }}>
           {/* Left: Map Panel */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {/* Fusion Status Banner */}
+            <FusionStatusBanner selectedSources={selectedSources} />
+
             <div style={{
               background: 'var(--surface)',
               borderRadius: 'var(--radius-lg)',
@@ -302,6 +307,13 @@ function App() {
                   startDate={startDate}
                   endDate={endDate}
                   onChange={handleDateChange}
+                />
+
+                {/* Temporal Alignment Timeline */}
+                <TemporalTimeline
+                  startDate={startDate}
+                  endDate={endDate}
+                  selectedSources={selectedSources}
                 />
 
                 <div className="section-divider" />

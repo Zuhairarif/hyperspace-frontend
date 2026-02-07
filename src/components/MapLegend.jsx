@@ -32,31 +32,65 @@ const MapLegend = ({ analysisType, selectedSources }) => {
           }}>
             Active Layers
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {selectedSources.map((id) => {
               const source = SOURCE_INDICATORS[id];
               if (!source) return null;
               return (
-                <div key={id} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}>
+                <div key={id}>
                   <div style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '2px',
-                    background: source.color,
-                    boxShadow: `0 0 0 2px ${source.color}30`,
-                    flexShrink: 0
-                  }} />
-                  <span style={{
-                    fontSize: '11px',
-                    fontWeight: '500',
-                    color: 'var(--text-primary)'
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginBottom: '4px'
                   }}>
-                    {source.label}
-                  </span>
+                    <div style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '2px',
+                      background: source.color,
+                      boxShadow: `0 0 0 2px ${source.color}30`,
+                      flexShrink: 0
+                    }} />
+                    <span style={{
+                      fontSize: '11px',
+                      fontWeight: '500',
+                      color: 'var(--text-primary)',
+                      flex: 1
+                    }}>
+                      {source.label}
+                    </span>
+                  </div>
+                  {/* Opacity slider */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    paddingLeft: '18px'
+                  }}>
+                    <span style={{ fontSize: '9px', color: 'var(--text-tertiary)', fontWeight: '500' }}>
+                      Opacity
+                    </span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      defaultValue="70"
+                      className="opacity-slider"
+                      style={{
+                        width: '60px',
+                        height: '3px',
+                        appearance: 'none',
+                        WebkitAppearance: 'none',
+                        background: `linear-gradient(to right, ${source.color}, ${source.color}40)`,
+                        borderRadius: '2px',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        accentColor: source.color
+                      }}
+                      aria-label={`${source.label} opacity`}
+                    />
+                  </div>
                 </div>
               );
             })}
