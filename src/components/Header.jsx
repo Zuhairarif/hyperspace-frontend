@@ -10,27 +10,43 @@ const GeoscopeLogo = () => (
     justifyContent: 'center'
   }}>
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Scope reticle circle */}
-      <circle cx="20" cy="20" r="8" stroke="#1E3A8A" strokeWidth="1.5" fill="none" />
-      {/* Crosshair lines */}
-      <line x1="20" y1="10" x2="20" y2="15" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
-      <line x1="20" y1="25" x2="20" y2="30" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
-      <line x1="10" y1="20" x2="15" y2="20" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
-      <line x1="25" y1="20" x2="30" y2="20" stroke="#1E3A8A" strokeWidth="1.2" strokeLinecap="round" />
-      {/* Central fusion dot */}
-      <circle cx="20" cy="20" r="2.2" fill="#0EA5E9" />
-      {/* Orbit arc 1 - top-right sweep */}
-      <path d="M 32 8 A 16 16 0 0 1 38 20" stroke="#0EA5E9" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      {/* Satellite 1 */}
-      <rect x="36.5" y="18.5" width="3" height="2" rx="0.5" fill="#0EA5E9" />
-      <line x1="38" y1="17.5" x2="38" y2="21.5" stroke="#0EA5E9" strokeWidth="0.8" strokeLinecap="round" />
-      {/* Orbit arc 2 - bottom-left sweep */}
-      <path d="M 8 32 A 16 16 0 0 1 2 20" stroke="#1E3A8A" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      {/* Satellite 2 */}
-      <rect x="0.5" y="18.5" width="3" height="2" rx="0.5" fill="#1E3A8A" />
-      <line x1="2" y1="17.5" x2="2" y2="21.5" stroke="#1E3A8A" strokeWidth="0.8" strokeLinecap="round" />
-      {/* Orbit arc 3 - subtle tertiary */}
-      <path d="M 10 4 A 16 16 0 0 0 4 14" stroke="#1E3A8A" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.4" />
+      {/* Satellite body - central cube */}
+      <rect x="16" y="15" width="8" height="10" rx="1.5" fill="#1E3A8A" />
+      {/* Body highlight stripe */}
+      <rect x="18" y="15" width="2" height="10" rx="0.5" fill="#0EA5E9" opacity="0.5" />
+
+      {/* Left solar panel */}
+      <rect x="2" y="17" width="12" height="6" rx="1" fill="#0EA5E9" />
+      {/* Left panel grid lines */}
+      <line x1="6" y1="17" x2="6" y2="23" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      <line x1="10" y1="17" x2="10" y2="23" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      <line x1="2" y1="20" x2="14" y2="20" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      {/* Left panel arm */}
+      <rect x="14" y="19" width="2" height="2" rx="0.3" fill="#1E3A8A" opacity="0.6" />
+
+      {/* Right solar panel */}
+      <rect x="26" y="17" width="12" height="6" rx="1" fill="#0EA5E9" />
+      {/* Right panel grid lines */}
+      <line x1="30" y1="17" x2="30" y2="23" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      <line x1="34" y1="17" x2="34" y2="23" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      <line x1="26" y1="20" x2="38" y2="20" stroke="#1E3A8A" strokeWidth="0.5" opacity="0.3" />
+      {/* Right panel arm */}
+      <rect x="24" y="19" width="2" height="2" rx="0.3" fill="#1E3A8A" opacity="0.6" />
+
+      {/* Antenna dish on top */}
+      <line x1="20" y1="15" x2="20" y2="10" stroke="#1E3A8A" strokeWidth="1" strokeLinecap="round" />
+      <path d="M 16 10 Q 20 6 24 10" stroke="#1E3A8A" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      {/* Signal waves */}
+      <path d="M 17 8 Q 20 5 23 8" stroke="#0EA5E9" strokeWidth="0.7" fill="none" strokeLinecap="round" opacity="0.6" />
+      <path d="M 18 6 Q 20 3.5 22 6" stroke="#0EA5E9" strokeWidth="0.5" fill="none" strokeLinecap="round" opacity="0.4" />
+
+      {/* Sensor lens on bottom */}
+      <circle cx="20" cy="27" r="2" fill="#0EA5E9" />
+      <circle cx="20" cy="27" r="1" fill="#1E3A8A" />
+
+      {/* Orbit ring around satellite */}
+      <ellipse cx="20" cy="20" rx="19" ry="5" stroke="#0EA5E9" strokeWidth="0.6" fill="none" opacity="0.25"
+        transform="rotate(-15, 20, 20)" />
     </svg>
   </div>
 );
